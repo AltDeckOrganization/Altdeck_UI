@@ -1,0 +1,25 @@
+
+.footerLinks{
+    color: #30a74a;
+    text-decoration: none;
+    padding: 10px;
+   
+}
+.footerLinks:hover{
+    color: white;
+}
+.footer-section{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    width: 100%;
+    color: #30a74a;
+    background-color: black;
+}
+.footer-heading{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+.footer-logo{
+    height: 100px;
+    width: 300px;
+}

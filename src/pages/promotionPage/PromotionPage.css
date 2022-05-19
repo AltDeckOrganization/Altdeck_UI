@@ -1,0 +1,179 @@
+.promotion-page{
+background-color: #000000;
+color: #ffffff;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.daimond-logo{
+    height: 30px;
+}
+.promotion-pakages{
+    background-color: #30a74a;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px 20px;
+    width: 300px;
+}
+@media screen and (max-width: 900px) {
+    .promotion-pakages{
+        background-color: #30a74a;
+        border-radius: 10px;
+        text-align: center;
+        padding: 10px 20px;
+        width: 200px;
+    } 
+}
+@media screen and (max-width: 500px) {
+    .promotion-pakages{
+        background-color: #30a74a;
+        border-radius: 10px;
+        text-align: center;
+        padding: 10px 20px;
+        width: 300px;
+    } 
+}
+.combo-pakage-one{
+    background-color: #30a74a;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px 20px;
+    width: 300px;
+    height: 300px;
+    margin-top: 60px;
+}
+@media screen and (max-width: 900px) {
+    .combo-pakage-one{
+        background-color: #30a74a;
+        border-radius: 10px;
+        text-align: center;
+        padding: 10px 20px;
+        width: 200px;
+        height: 300px;
+        margin-top: 60px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .combo-pakage-one{
+        background-color: #30a74a;
+        border-radius: 10px;
+        text-align: center;
+        padding: 10px 20px;
+        width: 300px;
+        height: 300px;
+        margin-top: 60px;
+    }
+}
+.combo-pakage-two{
+    background-color: #30a74a;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px 20px;
+    width: 300px;
+    height: 400px;
+    margin-top: 60px;
+}
+@media screen and (max-width: 900px) {
+    .combo-pakage-two{
+        background-color: #30a74a;
+        border-radius: 10px;
+        text-align: center;
+        padding: 10px 20px;
+        width: 200px;
+        height: 400px;
+        margin-top: 60px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .combo-pakage-two{
+        background-color: #30a74a;
+        border-radius: 10px;
+        text-align: center;
+        padding: 10px 20px;
+        width: 300px;
+        height: 400px;
+        margin-top: 60px;
+    }
+}
+.combo-pakage-three{
+    background-color: #30a74a;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px 20px;
+    width: 300px;
+    height: 300px;
+    margin-top: 60px;
+}
+@media screen and (max-width: 900px) {
+    .combo-pakage-three{
+        background-color: #30a74a;
+        border-radius: 10px;
+        text-align: center;
+        padding: 10px 20px;
+        width: 200px;
+        height: 300px;
+        margin-top: 60px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .combo-pakage-three{
+        background-color: #30a74a;
+        border-radius: 10px;
+        text-align: center;
+        padding: 10px 20px;
+        width: 300px;
+        height: 300px;
+        margin-top: 60px;
+    }
+}
+.circle-logo{
+    color: #000000;
+    font-size: 18px;
+}
+.promotion-section-text{
+    line-height: 2;
+}
+.fire-logo{
+    height:  32px;
+}
+.mooner-logo{
+    float: left;
+}
+.mooner-rocket{
+    height: 200px;
+}
+.mooner-logo-two{
+    float: right;
+}
+
+.percentage-text{
+    color: #30a74a;
+}
+.discount-heading{
+    margin-top: 100px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.discount-text{
+    margin-top: 60px;
+    line-height: 2;
+}
+.pancakeSwap{
+    background-color: #30a74a;
+    color: #ffffff;
+    width: 90px;
+    height: 65px;
+    text-align: center;
+    border-radius: 70px;
+   
+
+}
+.pancakeSwap:hover{
+    background-color: #000000;
+    color: #ffffff;
+    width: 90px;
+    height: 65px;
+    text-align: center;
+    border: 1px solid #30a74a;
+}
+.pancake-logo{
+  height: 46px;
+  width: 50px;
+}

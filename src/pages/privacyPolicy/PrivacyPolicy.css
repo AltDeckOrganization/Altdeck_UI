@@ -1,0 +1,14 @@
+.privacy{
+    background-color: #000000;
+    color: #ffffff;
+}
+@media screen and (max-width: 480px) {
+    .privacy{
+        padding-left: 10px;
+        background-color: #000000;
+        color: #ffffff;
+    }
+}
+.privacy-heading{
+    margin-top: 100px;
+}
