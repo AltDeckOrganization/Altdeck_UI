@@ -1,8 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AddNewToken.css";
 import { Container, Box, Grid } from "@mui/material";
 
 const AddNewToken = () => {
+
+  // All coins
+  const coins = ["----", "ADA", "Algorand", "Avalanche", "Binance Smart Chain", "Bitcoin Clone",
+    "Cronos", "DeepOnion", "Elastos", "Enecuum", "Eround chain", "Ethereum", "Fantom",
+    "Gnosis", "HTMLCOIN HR20", "Harmony", "KardiaChain Ecosystem", "KuCoin Community Chain",
+    "Mikomenda", "Moonriver", "MultiVAC", "OASIS", "Polkadot", "Polygon", "RADIX", "SDEX",
+    "SiriCoin", "Solana", "TRON", "Telos", "Tera", "WAX", "Waves", "XRPL"]
+
+  // coins array for select option <dropdown>
+  const coinsList = Array.from(coins)
+
+  // Coin info
+  const [coinName, setCoinName] = useState();
+  const [coinSymbol, setCoinSymbol] = useState();
+  const [coinDescription, setCoinDescription] = useState();
+  const [coinPrice, setCoinPrice] = useState();
+  const [coinLaunchDate, setCoinLaunchDate] = useState();
+
+  // Coin address
+  const [coinChain, setCoinChain] = useState();
+  const [coinAddress, setCoinAddress] = useState();
+
+  // Links
+  const [website, setWebsite] = useState();
+  const [audit, setAudit] = useState();
+  const [twitter, setTwitter] = useState()
+  const [telegram, setTelegram] = useState();
+  const [discord, setDiscord] = useState();
+  const [reddit, setReddit] = useState();
+  const [logo, setLogo] = useState();
+  const [addInfo, setAddInfo] = useState();
+
+  // Contact info
+  const [emailContact, setEmailContact] = useState();
+  const [telegramContact, setTelegramContact] = useState();
+
+  // Add coin
+  const handleAddCoin = (e) => {
+    e.preventDefault();
+
+    const formData = {
+      coinName,
+      coinSymbol,
+      coinDescription,
+      coinPrice,
+      coinLaunchDate,
+      coinChain,
+      coinAddress,
+      website,
+      audit,
+      telegram,
+      twitter,
+      discord,
+      reddit,
+      logo,
+      addInfo,
+      emailContact,
+      telegramContact
+    };
+
+    console.log(formData);
+
+  };
+
   return (
     <div>
       <div className="addtoken">
@@ -10,160 +74,184 @@ const AddNewToken = () => {
           <h1 className="coin-info-heading">Add Your Coin</h1>
         </center>
 
-        <Container>
-          <Box>
-            <Grid container spacing={4} className="input-section">
-              {/* <Grid item xs={12} sm={12} md={0} lg={2}></Grid> */}
-              <Grid item  xs={12} sm={6} md={4} lg={4}>                    <Box>
+        <form onSubmit={handleAddCoin}>
+          <Container>
+            <Box>
+              <Grid container spacing={4} className="input-section">
+                {/* <Grid item xs={12} sm={12} md={0} lg={2}></Grid> */}
+                <Grid item xs={12} sm={6} md={4} lg={4}>                    <Box>
                   <h2>Coin Info</h2>
-                  <form action="/action_page.php">
-                    <label for="fname">
-                      Name: <span className="required">required</span>
-                    </label>
-                    <br />
-                    <input
-                      className="input-section"
-                      type="text"
-                      id="fname"
-                      name="fname"
-                      placeholder="e.g. bitcoin"
-                    />
-                    <br />
-                    <br />
-                    <label for="lname">
-                      Symbol: <span className="required">required</span>
-                    </label>
-                    <br />
-                    <input
-                      className="input-section"
-                      type="text"
-                      id="lname"
-                      name="symbol"
-                      placeholder="e.g. BTC"
-                    />
-                    <br /> <br />
-                    <label for="lname">
-                      Description <span className="required">required</span>
-                    </label>
-                    <br />
-                    <textarea
-                      id="txtid"
-                      name="txtname"
-                      rows="8"
-                      cols="39"
-                      maxlength="200"
-                      placeholder="e.g. Bitcoin is a decentralized digital currency"
-                    ></textarea>
-                    <br /> <br />
-                    <label for="fname">Price in USD </label>
-                    <br />
-                    <input
-                      className="input-section"
-                      type="text"
-                      id="fname"
-                      name="fname"
-                      placeholder="e.g. 0.006"
-                    />
-                    <br />
-                    <br />{" "}
-                    <label for="lname">
-                      Launch date (YYYY-MM-DD){" "}
-                      <span className="required">required</span>
-                    </label>
-                    <br />
-                    <input
-                      className="input-section"
-                      type="text"
-                      id="lname"
-                      name="lname"
-                      value="Doe"
-                    />
-                    <br /> <h2>Coin Address</h2>
-                    <br />{" "}
-                    <label>
-                      Chain <span className="required">required</span>
-                    </label>{" "}
-                    <br />
-                    <select className="dropdown">
-                      <option value="audi" selected>
-                        -
-                      </option>{" "}
-                      <option value="volvo">ADA</option>
-                      <option value="saab">Algorand</option>
-                      <option value="vw">Avalanche</option>
-                      <option value="volvo">Binance Smart Chain</option>
-                      <option value="saab">Bitcoin Clone</option>
-                      <option value="vw">Cronos</option>{" "}
-                      <option value="volvo">DeepOnion</option>
-                      <option value="saab">Elastos</option>
-                      <option value="vw">Enecuum</option>{" "}
-                      <option value="volvo">Erond chain</option>
-                      <option value="saab">Ethereum</option>
-                      <option value="vw">Fantom</option>{" "}
-                      <option value="volvo">Gnosis</option>
-                      <option value="saab">HTMLCOIN HRC20</option>
-                      <option value="vw">Harmony</option>{" "}
-                      <option value="volvo">KardiaChain Ecosystem</option>
-                      <option value="saab">KuCoin Community Chain</option>
-                      <option value="vw">Mikomeda</option>{" "}
-                      <option value="saab">Moonriver</option>
-                      <option value="vw">MultiVAC</option>{" "}
-                      <option value="volvo">OASIS</option>
-                      <option value="saab">Polkadot</option>
-                      <option value="vw">Polygon</option>{" "}
-                      <option value="volvo">RADIX DLT</option>
-                      <option value="saab">SDEX</option>
-                      <option value="vw">SiriCoin</option>{" "}
-                      <option value="volvo">Solana</option>
-                      <option value="saab">TRON</option>
-                      <option value="vw">Telos</option>{" "}
-                      <option value="vw">Tera</option>{" "}
-                      <option value="volvo">WAX</option>
-                      <option value="saab">Waves</option>
-                      <option value="vw">XRPL</option>{" "}
-                    </select>
-                    <br />
-                    <br />
-                    <label for="lname">
-                      Address <span className="required">required</span>
-                    </label>
-                    <br />
-                    <input
-                      className="input-section"
-                      type="text"
-                      id="lname"
-                      name="lname"
-                      placeholder=""
-                    />
-                    <br />{" "}
-                  </form>
+                  <label htmlFor="fname">
+                    Name: <span className="required">required</span>
+                  </label>
+                  <br />
+                  <input
+                    className="input-section"
+                    type="text"
+                    id="fname"
+                    name="coinName"
+                    value={coinName}
+                    onChange={e => setCoinName(e.target.value)}
+                    placeholder="e.g. bitcoin"
+                  />
+                  <br />
+                  <br />
+                  <label htmlFor="lname">
+                    Symbol: <span className="required">required</span>
+                  </label>
+                  <br />
+                  <input
+                    className="input-section"
+                    type="text"
+                    id="lname"
+                    name="coinSymbol"
+                    value={coinSymbol}
+                    onChange={e => setCoinSymbol(e.target.value)}
+                    placeholder="e.g. BTC"
+                  />
+                  <br /> <br />
+                  <label htmlFor="lname">
+                    Description <span className="required">required</span>
+                  </label>
+                  <br />
+                  <textarea
+                    id="txtid"
+                    name="coinDescription"
+                    rows="8"
+                    cols="39"
+                    maxLength="200"
+                    value={coinDescription}
+                    onChange={e => setCoinDescription(e.target.value)}
+                    placeholder="e.g. Bitcoin is a decentralized digital currency"
+                  ></textarea>
+                  <br /> <br />
+                  <label htmlFor="fname">Price in USD </label>
+                  <br />
+                  <input
+                    className="input-section"
+                    type="text"
+                    id="fname"
+                    name="coinPrice"
+                    value={coinPrice}
+                    onChange={e => setCoinPrice(e.target.value)}
+                    placeholder="e.g. 0.006"
+                  />
+                  <br />
+                  <br />{" "}
+                  <label htmlFor="lname">
+                    Launch date (YYYY-MM-DD){" "}
+                    <span className="required">required</span>
+                  </label>
+                  <br />
+                  <input
+                    className="input-section"
+                    type="text"
+                    id="lname"
+                    name="lname"
+                    value={coinLaunchDate}
+                    onChange={e => setCoinLaunchDate(e.target.value)}
+                  />
+                  <br /> <h2>Coin Address</h2>
+                  <label>
+                    Chain <span className="required">required</span>
+                  </label>{" "}
+                  {/* <select className="dropdown">
+                    <option value="audi" selected>
+                      -
+                    </option>{" "}
+                    <option value="volvo">ADA</option>
+                    <option value="saab">Algorand</option>
+                    <option value="vw">Avalanche</option>
+                    <option value="volvo">Binance Smart Chain</option>
+                    <option value="saab">Bitcoin Clone</option>
+                    <option value="vw">Cronos</option>{" "}
+                    <option value="volvo">DeepOnion</option>
+                    <option value="saab">Elastos</option>
+                    <option value="vw">Enecuum</option>{" "}
+                    <option value="volvo">Erond chain</option>
+                    <option value="saab">Ethereum</option>
+                    <option value="vw">Fantom</option>{" "}
+                    <option value="volvo">Gnosis</option>
+                    <option value="saab">HTMLCOIN HRC20</option>
+                    <option value="vw">Harmony</option>{" "}
+                    <option value="volvo">KardiaChain Ecosystem</option>
+                    <option value="saab">KuCoin Community Chain</option>
+                    <option value="vw">Mikomeda</option>{" "}
+                    <option value="saab">Moonriver</option>
+                    <option value="vw">MultiVAC</option>{" "}
+                    <option value="volvo">OASIS</option>
+                    <option value="saab">Polkadot</option>
+                    <option value="vw">Polygon</option>{" "}
+                    <option value="volvo">RADIX DLT</option>
+                    <option value="saab">SDEX</option>
+                    <option value="vw">SiriCoin</option>{" "}
+                    <option value="volvo">Solana</option>
+                    <option value="saab">TRON</option>
+                    <option value="vw">Telos</option>{" "}
+                    <option value="vw">Tera</option>{" "}
+                    <option value="volvo">WAX</option>
+                    <option value="saab">Waves</option>
+                    <option value="vw">XRPL</option>{" "}
+                  </select> */}
+
+                  <select className="dropdown"
+                    onChange={e => setCoinChain(e.target.value)}
+                  >
+                    {
+                      coinsList.map((coin) =>
+                        <option key={coin} value={coin}>
+                          {coin}
+                        </option>)
+                    }
+                  </select>
+                  <br />
+
+                  <br />
+                  <label htmlFor="lname">
+                    Address <span className="required">required</span>
+                  </label>
+                  <br />
+                  <input
+                    className="input-section"
+                    type="text"
+                    id="lname"
+                    name="coinAddress"
+                    placeholder=""
+                    value={coinAddress}
+                    onChange={e => setCoinAddress(e.target.value)}
+                  />
+                  <br />{" "}
                 </Box>
-              </Grid>
-              <Grid item  xs={12} sm={6} md={4} lg={4}>                    <Box>
-                  <h2>Links</h2>
-                  <form action="/action_page.php">
-                    <label for="fname">Website</label>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={4}>
+                  <Box>
+                    <h2>Links</h2>
+                    <label htmlFor="fname">Website</label>
                     <br />
                     <input
                       className="input-section"
                       type="text"
                       id="fname"
-                      name="fname"
+                      name="website"
                       placeholder="www.example.com"
+                      value={website}
+                      onChange={e => setWebsite(e.target.value)}
                     />
                     <br />
-                    <br /> <label for="lname">Audit</label>
+                    <br /> <label htmlFor="lname">Audit</label>
                     <br />
                     <input
                       className="input-section"
                       type="text"
                       id="lname"
-                      name="lname"
+                      name="audit"
+                      value={audit}
+                      onChange={e => setAudit(e.target.value)}
                       placeholder="e.g. https://github.com/bitcoin"
                     />
                     <br />
                     <br />{" "}
-                    <label for="fname">
+                    <label htmlFor="fname">
                       Telegram <span className="required">required</span>
                     </label>
                     <br />
@@ -171,41 +259,49 @@ const AddNewToken = () => {
                       className="input-section"
                       type="text"
                       id="fname"
-                      name="fname"
+                      name="telegram"
+                      value={telegram}
+                      onChange={e => setTelegram(e.target.value)}
                       placeholder="e.g. https://t.me/bitcoin"
                     />
                     <br />
-                    <br /> <label for="lname">Twitter</label>
+                    <br /> <label htmlFor="lname">Twitter</label>
                     <br />
                     <input
                       className="input-section"
                       type="text"
                       id="lname"
-                      name="lname"
+                      name="twitter"
+                      value={twitter}
+                      onChange={e => setTwitter(e.target.value)}
                       placeholder="e.g. https://twitter.com/bitcoin"
                     />
-                    <br /> <label for="fname">Discord</label>
+                    <br /> <label htmlFor="fname">Discord</label>
                     <br />
                     <input
                       className="input-section"
                       type="text"
                       id="fname"
-                      name="fname"
+                      name="discord"
+                      value={discord}
+                      onChange={e => setDiscord(e.target.value)}
                       placeholder="e.g. https://discord.gg/46URkm"
                     />
                     <br />
-                    <br /> <label for="lname">Reddit</label>
+                    <br /> <label htmlFor="lname">Reddit</label>
                     <br />
                     <input
                       className="input-section"
                       type="text"
                       id="lname"
-                      name="lname"
+                      name="reddit"
+                      value={reddit}
+                      onChange={e => setReddit(e.target.value)}
                       placeholder="e.g. https://reddit.com/r/bitcoin"
                     />
                     <br />
                     <br />{" "}
-                    <label for="fname">
+                    <label htmlFor="fname">
                       Logo <span className="required">required</span>
                     </label>
                     <br />
@@ -213,11 +309,13 @@ const AddNewToken = () => {
                       className="input-section"
                       type="text"
                       id="fname"
-                      name="fname"
+                      name="logo"
+                      value={logo}
+                      onChange={e => setLogo(e.target.value)}
                       placeholder="e.g. https://i.ibb.co/logo.png"
                     />
                     <br /> <br />
-                    <label for="lname">
+                    <label htmlFor="lname">
                       Additional information, other links
                       <br /> and addresses{" "}
                       <span className="required">required</span>
@@ -228,8 +326,10 @@ const AddNewToken = () => {
                       name="txtname"
                       rows="8"
                       cols="39"
-                      maxlength="200"
+                      maxLength="200"
                       placeholder=""
+                      value={addInfo}
+                      onChange={e => setAddInfo(e.target.value)}
                     ></textarea>
                     <br />
                     <br /> <h2>Contact Info</h2>
@@ -237,7 +337,7 @@ const AddNewToken = () => {
                       For later changes to coin info, please provide the
                       following:
                     </h3>
-                    <label for="lname">
+                    <label htmlFor="lname">
                       Contact Email <span className="required">required</span>
                     </label>
                     <br />
@@ -245,10 +345,12 @@ const AddNewToken = () => {
                       className="input-section"
                       type="text"
                       id="lname"
-                      name="lname"
+                      name="emailContact"
+                      value={emailContact}
+                      onChange={e => setEmailContact(e.target.value)}
                     />{" "}
                     <br /> <br />
-                    <label for="lname">
+                    <label htmlFor="lname">
                       Contact Telegram{" "}
                       <span className="required">required</span>
                     </label>
@@ -257,21 +359,28 @@ const AddNewToken = () => {
                       className="input-section"
                       type="text"
                       id="lname"
-                      name="lname"
+                      name="telegramContact"
+                      value={telegramContact}
+                      onChange={e => setTelegramContact(e.target.value)}
                     />{" "}
-                  </form>
-                  <div>
-                    {" "}
-                    <br />
-                    <button className="add-coin-btn">Add Coin</button>
-                  </div>{" "}
-                </Box>
+                    <div>
+                      {" "}
+                      <br />
+                      <button
+                        className="add-coin-btn"
+                        type="submit"
+                      >
+                        Add Coin
+                      </button>
+                    </div>{" "}
+                  </Box>
+                </Grid>
+                {/* <Grid item xs={12} sm={12} md={0} lg={2}></Grid> */}
               </Grid>
-              {/* <Grid item xs={12} sm={12} md={0} lg={2}></Grid> */}
-            </Grid>
-            <br></br>
-          </Box>
-        </Container>
+              <br></br>
+            </Box>
+          </Container>
+        </form>
       </div>
     </div>
   );
