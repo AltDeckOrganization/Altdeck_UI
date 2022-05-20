@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./AddNewToken.css";
 import { Container, Box, Grid } from "@mui/material";
 
@@ -39,7 +40,7 @@ const AddNewToken = () => {
   const [emailContact, setEmailContact] = useState();
   const [telegramContact, setTelegramContact] = useState();
 
-  // Add coin
+  // Add new coin
   const handleAddCoin = (e) => {
     e.preventDefault();
 
@@ -63,8 +64,21 @@ const AddNewToken = () => {
       telegramContact
     };
 
-    console.log(formData);
+    const formDataToString = JSON.stringify(formData);
+    // console.log(formDataToString)
 
+    const serverUrl = process.env.REACT_APP_BACKEND_URL
+    const url = `${serverUrl}/api/v1/add_token`
+    const data = {
+      token_detail: formDataToString
+    }
+
+    axios
+      .post(url, data)
+      .then((data) => {
+        console.log(data)
+      })
+      .catch((e) => console.log(e))
   };
 
   return (
