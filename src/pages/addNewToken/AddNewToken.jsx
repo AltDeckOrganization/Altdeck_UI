@@ -67,18 +67,36 @@ const AddNewToken = () => {
     const formDataToString = JSON.stringify(formData);
     // console.log(formDataToString)
 
-    const serverUrl = process.env.REACT_APP_BACKEND_URL
-    const url = `${serverUrl}/api/v1/add_token`
+    const serverUrl = process.env.REACT_APP_BACKEND_URL;
+    console.log(serverUrl);
+    const url = `${serverUrl}/api/v1/add_token`;
     const data = {
       token_detail: formDataToString
-    }
-
+    };
     axios
       .post(url, data)
       .then((data) => {
         console.log(data)
       })
       .catch((e) => console.log(e))
+
+    setCoinName("");
+    setCoinSymbol("");
+    setCoinDescription("");
+    setCoinPrice("");
+    setCoinLaunchDate("");
+    setCoinChain("");
+    setCoinAddress("");
+    setWebsite("");
+    setAudit("");
+    setTelegram("");
+    setTwitter("");
+    setDiscord("");
+    setReddit("");
+    setLogo("");
+    setAddInfo("");
+    setEmailContact("");
+    setTelegramContact("");
   };
 
   return (
