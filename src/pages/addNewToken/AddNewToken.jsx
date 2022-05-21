@@ -64,7 +64,7 @@ const AddNewToken = () => {
 
     const formDataToString = JSON.stringify(formData);
     const serverUrl = process.env.REACT_APP_BACKEND_URL;
-    const url = `${serverUrl}/api/v1/add_token`;
+    const url = `${serverUrl}/api/v1/tokens`;
     const data = {
       name: coinName,
       bitcoin: coinChain,
