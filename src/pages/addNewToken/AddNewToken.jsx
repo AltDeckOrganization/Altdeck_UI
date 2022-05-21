@@ -45,12 +45,10 @@ const AddNewToken = () => {
     e.preventDefault();
 
     const formData = {
-      coinName,
       coinSymbol,
       coinDescription,
       coinPrice,
       coinLaunchDate,
-      coinChain,
       coinAddress,
       website,
       audit,
@@ -65,12 +63,11 @@ const AddNewToken = () => {
     };
 
     const formDataToString = JSON.stringify(formData);
-    // console.log(formDataToString)
-
     const serverUrl = process.env.REACT_APP_BACKEND_URL;
-    console.log(serverUrl);
     const url = `${serverUrl}/api/v1/add_token`;
     const data = {
+      name: coinName,
+      bitcoin: coinChain,
       token_detail: formDataToString
     };
     axios
@@ -78,7 +75,7 @@ const AddNewToken = () => {
       .then((data) => {
         console.log(data)
       })
-      .catch((e) => console.log(e))
+      .catch((e) => console.log(e));
 
     setCoinName("");
     setCoinSymbol("");
