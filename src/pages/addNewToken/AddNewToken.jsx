@@ -67,8 +67,11 @@ const AddNewToken = () => {
     const url = `${serverUrl}/api/v1/tokens`;
     const data = {
       name: coinName,
-      bitcoin: coinChain,
-      token_detail: formDataToString
+      blockchain: coinChain,
+      token_detail: formDataToString,
+      date_created: new Date(),
+      date_updated: new Date(),
+      date_deleted: new Date()
     };
     axios
       .post(url, data)
@@ -184,45 +187,6 @@ const AddNewToken = () => {
                   <label>
                     Chain <span className="required">required</span>
                   </label>{" "}
-                  {/* <select className="dropdown">
-                    <option value="audi" selected>
-                      -
-                    </option>{" "}
-                    <option value="volvo">ADA</option>
-                    <option value="saab">Algorand</option>
-                    <option value="vw">Avalanche</option>
-                    <option value="volvo">Binance Smart Chain</option>
-                    <option value="saab">Bitcoin Clone</option>
-                    <option value="vw">Cronos</option>{" "}
-                    <option value="volvo">DeepOnion</option>
-                    <option value="saab">Elastos</option>
-                    <option value="vw">Enecuum</option>{" "}
-                    <option value="volvo">Erond chain</option>
-                    <option value="saab">Ethereum</option>
-                    <option value="vw">Fantom</option>{" "}
-                    <option value="volvo">Gnosis</option>
-                    <option value="saab">HTMLCOIN HRC20</option>
-                    <option value="vw">Harmony</option>{" "}
-                    <option value="volvo">KardiaChain Ecosystem</option>
-                    <option value="saab">KuCoin Community Chain</option>
-                    <option value="vw">Mikomeda</option>{" "}
-                    <option value="saab">Moonriver</option>
-                    <option value="vw">MultiVAC</option>{" "}
-                    <option value="volvo">OASIS</option>
-                    <option value="saab">Polkadot</option>
-                    <option value="vw">Polygon</option>{" "}
-                    <option value="volvo">RADIX DLT</option>
-                    <option value="saab">SDEX</option>
-                    <option value="vw">SiriCoin</option>{" "}
-                    <option value="volvo">Solana</option>
-                    <option value="saab">TRON</option>
-                    <option value="vw">Telos</option>{" "}
-                    <option value="vw">Tera</option>{" "}
-                    <option value="volvo">WAX</option>
-                    <option value="saab">Waves</option>
-                    <option value="vw">XRPL</option>{" "}
-                  </select> */}
-
                   <select className="dropdown"
                     onChange={e => setCoinChain(e.target.value)}
                   >
