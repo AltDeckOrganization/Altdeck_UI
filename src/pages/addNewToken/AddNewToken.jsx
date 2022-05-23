@@ -69,7 +69,6 @@ const AddNewToken = () => {
       name: coinName,
       blockchain: coinChain,
       token_detail: formDataToString,
-      date_deleted: new Date()
     };
     axios
       .post(url, data)
