@@ -11,6 +11,8 @@ import News from "./coins/News";
 import AllTimeBest from "./coins/AllTimeBest";
 import PreSale from "./coins/PreSale";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -55,6 +57,9 @@ export default function BasicTabs() {
   const serverUrl = process.env.REACT_APP_BACKEND_URL;
   const url = `${serverUrl}/api/v1/tokens`;
 
+  const notifySuccess = (msg) => toast.success(msg);
+  const notifyError = (msg) => toast.error(msg);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -63,8 +68,14 @@ export default function BasicTabs() {
     console.log(index);
     axios
       .put(`${serverUrl}/api/v1/vote`, { id: index })
-      .then((res) => fetchTokenData())
-      .catch((err) => console.log(err));
+      .then((res) => {
+        notifySuccess("Vote was successful");
+        fetchTokenData();
+      })
+      .catch((err) => {
+        notifyError("Something went wrong when voting");
+        console.log(err);
+      });
   };
 
   const fetchTokenData = () => {
@@ -86,6 +97,7 @@ export default function BasicTabs() {
         setRows(row_data);
       })
       .catch((err) => {
+        notifyError("Something went wrong when fetching token data");
         console.log(err);
       });
   };
@@ -96,6 +108,9 @@ export default function BasicTabs() {
 
   return (
     <div className="home-section">
+      {/* Toaster */}
+      <ToastContainer position="top-center" />
+      {/* Toaster */}
       <Container>
         <Box>
           <Grid container spacing={4}>
@@ -132,7 +147,7 @@ export default function BasicTabs() {
                 label="Todays Hot"
                 {...a11yProps(0)}
               />
-              <Tab
+              {/* <Tab
                 style={{
                   width: "15%",
                   color: "white",
@@ -158,13 +173,13 @@ export default function BasicTabs() {
                 }}
                 label="PreSale"
                 {...a11yProps(3)}
-              />
+              /> */}
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
             <TodaysHot handleVote={handleVote} rows={rows} />
           </TabPanel>
-          <TabPanel value={value} index={1}>
+          {/* <TabPanel value={value} index={1}>
             <News handleVote={handleVote} />
           </TabPanel>
           <TabPanel value={value} index={2}>
@@ -172,7 +187,7 @@ export default function BasicTabs() {
           </TabPanel>
           <TabPanel value={value} index={3}>
             <PreSale handleVote={handleVote} />
-          </TabPanel>{" "}
+          </TabPanel>{" "} */}
         </Box>
       </Container>{" "}
     </div>
