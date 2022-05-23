@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./AddNewToken.css";
 import { Container, Box, Grid } from "@mui/material";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddNewToken = () => {
 
@@ -40,6 +42,9 @@ const AddNewToken = () => {
   const [emailContact, setEmailContact] = useState();
   const [telegramContact, setTelegramContact] = useState();
 
+  // Notify user for adding new coin successfully
+  const notify = () => toast.success("Coin successfully added!")
+
   // Add new coin
   const handleAddCoin = (e) => {
     e.preventDefault();
@@ -70,10 +75,13 @@ const AddNewToken = () => {
       blockchain: coinChain,
       token_detail: formDataToString,
     };
+
+    console.log(data)
     axios
       .post(url, data)
       .then((data) => {
-        console.log(data)
+        notify();
+        console.log(data);
       })
       .catch((e) => console.log(e));
 
@@ -98,6 +106,9 @@ const AddNewToken = () => {
 
   return (
     <div>
+      {/* Toaster */}
+      <ToastContainer position="top-center" />
+      {/* Toaster */}
       <div className="addtoken">
         <center>
           <h1 className="coin-info-heading">Add Your Coin</h1>
