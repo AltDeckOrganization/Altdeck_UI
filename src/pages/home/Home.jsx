@@ -10,6 +10,7 @@ import TodaysHot from "./coins/TodaysHot";
 import News from "./coins/News";
 import AllTimeBest from "./coins/AllTimeBest";
 import PreSale from "./coins/PreSale";
+import axios from "axios";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -43,12 +44,55 @@ function a11yProps(index) {
   };
 }
 
+function createData(name, code, votes, vote) {
+  //   const density = population / size;
+  return { name, code, votes, vote };
+}
+
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
+  const [rows, setRows] = React.useState([]);
+  const serverUrl = process.env.REACT_APP_BACKEND_URL;
+  const url = `${serverUrl}/api/v1/tokens`;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const handleVote = (index) => {
+    console.log(index);
+    axios
+      .put(`${serverUrl}/api/v1/vote`, { id: index })
+      .then((res) => fetchTokenData())
+      .catch((err) => console.log(err));
+  };
+
+  const fetchTokenData = () => {
+    axios
+      .get(`${serverUrl}/api/v1/tokens`)
+      .then((res) => {
+        const { data } = res;
+        const row_data = [];
+        data.map((row) => {
+          row_data.push(
+            createData(
+              row.name,
+              JSON.parse(row.token_detail).coinSymbol,
+              row.votes,
+              <button onClick={() => handleVote(row.id)}>Vote</button>
+            )
+          );
+        });
+        setRows(row_data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  React.useEffect(() => {
+    fetchTokenData();
+  }, []);
 
   return (
     <div className="home-section">
@@ -79,7 +123,7 @@ export default function BasicTabs() {
               onChange={handleChange}
             >
               <Tab
-              className="tabs-section"
+                className="tabs-section"
                 style={{
                   width: "15%",
                   color: "white",
@@ -106,25 +150,28 @@ export default function BasicTabs() {
                 label="All Time Best"
                 {...a11yProps(2)}
               />
-              <Tab 
-                            style={{
-                              width: "15%",
-                              color: "white",
-                              border: "1px solid white",
-                            }} label="PreSale" {...a11yProps(3)} />
+              <Tab
+                style={{
+                  width: "15%",
+                  color: "white",
+                  border: "1px solid white",
+                }}
+                label="PreSale"
+                {...a11yProps(3)}
+              />
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
-            <TodaysHot />
+            <TodaysHot handleVote={handleVote} rows={rows} />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <News />
+            <News handleVote={handleVote} />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <AllTimeBest />
+            <AllTimeBest handleVote={handleVote} />
           </TabPanel>
           <TabPanel value={value} index={3}>
-            <PreSale />
+            <PreSale handleVote={handleVote} />
           </TabPanel>{" "}
         </Box>
       </Container>{" "}
