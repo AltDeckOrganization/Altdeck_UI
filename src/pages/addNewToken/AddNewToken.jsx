@@ -76,7 +76,6 @@ const AddNewToken = () => {
       token_detail: formDataToString,
     };
 
-    console.log(data)
     axios
       .post(url, data)
       .then((data) => {
