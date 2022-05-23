@@ -6,16 +6,46 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AddNewToken = () => {
-
   // All coins
-  const coins = ["----", "ADA", "Algorand", "Avalanche", "Binance Smart Chain", "Bitcoin Clone",
-    "Cronos", "DeepOnion", "Elastos", "Enecuum", "Eround chain", "Ethereum", "Fantom",
-    "Gnosis", "HTMLCOIN HR20", "Harmony", "KardiaChain Ecosystem", "KuCoin Community Chain",
-    "Mikomenda", "Moonriver", "MultiVAC", "OASIS", "Polkadot", "Polygon", "RADIX", "SDEX",
-    "SiriCoin", "Solana", "TRON", "Telos", "Tera", "WAX", "Waves", "XRPL"]
+  const coins = [
+    "----",
+    "ADA",
+    "Algorand",
+    "Avalanche",
+    "Binance Smart Chain",
+    "Bitcoin Clone",
+    "Cronos",
+    "DeepOnion",
+    "Elastos",
+    "Enecuum",
+    "Eround chain",
+    "Ethereum",
+    "Fantom",
+    "Gnosis",
+    "HTMLCOIN HR20",
+    "Harmony",
+    "KardiaChain Ecosystem",
+    "KuCoin Community Chain",
+    "Mikomenda",
+    "Moonriver",
+    "MultiVAC",
+    "OASIS",
+    "Polkadot",
+    "Polygon",
+    "RADIX",
+    "SDEX",
+    "SiriCoin",
+    "Solana",
+    "TRON",
+    "Telos",
+    "Tera",
+    "WAX",
+    "Waves",
+    "XRPL",
+  ];
 
   // coins array for select option <dropdown>
-  const coinsList = Array.from(coins)
+  const coinsList = Array.from(coins);
 
   // Coin info
   const [coinName, setCoinName] = useState();
@@ -31,7 +61,7 @@ const AddNewToken = () => {
   // Links
   const [website, setWebsite] = useState();
   const [audit, setAudit] = useState();
-  const [twitter, setTwitter] = useState()
+  const [twitter, setTwitter] = useState();
   const [telegram, setTelegram] = useState();
   const [discord, setDiscord] = useState();
   const [reddit, setReddit] = useState();
@@ -43,7 +73,7 @@ const AddNewToken = () => {
   const [telegramContact, setTelegramContact] = useState();
 
   // Notify user for adding new coin successfully
-  const notify = () => toast.success("Coin successfully added!")
+  const notify = () => toast.success("Coin successfully added!");
 
   // Add new coin
   const handleAddCoin = (e) => {
@@ -64,7 +94,7 @@ const AddNewToken = () => {
       logo,
       addInfo,
       emailContact,
-      telegramContact
+      telegramContact,
     };
 
     const formDataToString = JSON.stringify(formData);
@@ -118,110 +148,111 @@ const AddNewToken = () => {
             <Box>
               <Grid container spacing={4} className="input-section">
                 {/* <Grid item xs={12} sm={12} md={0} lg={2}></Grid> */}
-                <Grid item xs={12} sm={6} md={4} lg={4}>                    <Box>
-                  <h2>Coin Info</h2>
-                  <label htmlFor="fname">
-                    Name: <span className="required">required</span>
-                  </label>
-                  <br />
-                  <input
-                    className="input-section"
-                    type="text"
-                    id="fname"
-                    name="coinName"
-                    value={coinName}
-                    onChange={e => setCoinName(e.target.value)}
-                    placeholder="e.g. bitcoin"
-                  />
-                  <br />
-                  <br />
-                  <label htmlFor="lname">
-                    Symbol: <span className="required">required</span>
-                  </label>
-                  <br />
-                  <input
-                    className="input-section"
-                    type="text"
-                    id="lname"
-                    name="coinSymbol"
-                    value={coinSymbol}
-                    onChange={e => setCoinSymbol(e.target.value)}
-                    placeholder="e.g. BTC"
-                  />
-                  <br /> <br />
-                  <label htmlFor="lname">
-                    Description <span className="required">required</span>
-                  </label>
-                  <br />
-                  <textarea
-                    id="txtid"
-                    name="coinDescription"
-                    rows="8"
-                    cols="39"
-                    maxLength="200"
-                    value={coinDescription}
-                    onChange={e => setCoinDescription(e.target.value)}
-                    placeholder="e.g. Bitcoin is a decentralized digital currency"
-                  ></textarea>
-                  <br /> <br />
-                  <label htmlFor="fname">Price in USD </label>
-                  <br />
-                  <input
-                    className="input-section"
-                    type="text"
-                    id="fname"
-                    name="coinPrice"
-                    value={coinPrice}
-                    onChange={e => setCoinPrice(e.target.value)}
-                    placeholder="e.g. 0.006"
-                  />
-                  <br />
-                  <br />{" "}
-                  <label htmlFor="lname">
-                    Launch date (YYYY-MM-DD){" "}
-                    <span className="required">required</span>
-                  </label>
-                  <br />
-                  <input
-                    className="input-section"
-                    type="text"
-                    id="lname"
-                    name="lname"
-                    value={coinLaunchDate}
-                    onChange={e => setCoinLaunchDate(e.target.value)}
-                  />
-                  <br /> <h2>Coin Address</h2>
-                  <label>
-                    Chain <span className="required">required</span>
-                  </label>{" "}
-                  <select className="dropdown"
-                    onChange={e => setCoinChain(e.target.value)}
-                  >
-                    {
-                      coinsList.map((coin) =>
+                <Grid item xs={12} sm={6} md={4} lg={4}>
+                  {" "}
+                  <Box>
+                    <h2>Coin Info</h2>
+                    <label htmlFor="fname">
+                      Name: <span className="required">required</span>
+                    </label>
+                    <br />
+                    <input
+                      className="input-section"
+                      type="text"
+                      id="fname"
+                      name="coinName"
+                      value={coinName}
+                      onChange={(e) => setCoinName(e.target.value)}
+                      placeholder="e.g. bitcoin"
+                    />
+                    <br />
+                    <br />
+                    <label htmlFor="lname">
+                      Symbol: <span className="required">required</span>
+                    </label>
+                    <br />
+                    <input
+                      className="input-section"
+                      type="text"
+                      id="lname"
+                      name="coinSymbol"
+                      value={coinSymbol}
+                      onChange={(e) => setCoinSymbol(e.target.value)}
+                      placeholder="e.g. BTC"
+                    />
+                    <br /> <br />
+                    <label htmlFor="lname">
+                      Description <span className="required">required</span>
+                    </label>
+                    <br />
+                    <textarea
+                      id="txtid"
+                      name="coinDescription"
+                      rows="8"
+                      cols="39"
+                      maxLength="200"
+                      value={coinDescription}
+                      onChange={(e) => setCoinDescription(e.target.value)}
+                      placeholder="e.g. Bitcoin is a decentralized digital currency"
+                    ></textarea>
+                    <br /> <br />
+                    <label htmlFor="fname">Price in USD </label>
+                    <br />
+                    <input
+                      className="input-section"
+                      type="text"
+                      id="fname"
+                      name="coinPrice"
+                      value={coinPrice}
+                      onChange={(e) => setCoinPrice(e.target.value)}
+                      placeholder="e.g. 0.006"
+                    />
+                    <br />
+                    <br />{" "}
+                    <label htmlFor="lname">
+                      Launch date (YYYY-MM-DD){" "}
+                      <span className="required">required</span>
+                    </label>
+                    <br />
+                    <input
+                      className="input-section"
+                      type="text"
+                      id="lname"
+                      name="lname"
+                      value={coinLaunchDate}
+                      onChange={(e) => setCoinLaunchDate(e.target.value)}
+                    />
+                    <br /> <h2>Coin Address</h2>
+                    <label>
+                      Chain <span className="required">required</span>
+                    </label>{" "}
+                    <select
+                      className="dropdown"
+                      onChange={(e) => setCoinChain(e.target.value)}
+                    >
+                      {coinsList.map((coin) => (
                         <option key={coin} value={coin}>
                           {coin}
-                        </option>)
-                    }
-                  </select>
-                  <br />
-
-                  <br />
-                  <label htmlFor="lname">
-                    Address <span className="required">required</span>
-                  </label>
-                  <br />
-                  <input
-                    className="input-section"
-                    type="text"
-                    id="lname"
-                    name="coinAddress"
-                    placeholder=""
-                    value={coinAddress}
-                    onChange={e => setCoinAddress(e.target.value)}
-                  />
-                  <br />{" "}
-                </Box>
+                        </option>
+                      ))}
+                    </select>
+                    <br />
+                    <br />
+                    <label htmlFor="lname">
+                      Address <span className="required">required</span>
+                    </label>
+                    <br />
+                    <input
+                      className="input-section"
+                      type="text"
+                      id="lname"
+                      name="coinAddress"
+                      placeholder=""
+                      value={coinAddress}
+                      onChange={(e) => setCoinAddress(e.target.value)}
+                    />
+                    <br />{" "}
+                  </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={4}>
                   <Box>
@@ -235,7 +266,7 @@ const AddNewToken = () => {
                       name="website"
                       placeholder="www.example.com"
                       value={website}
-                      onChange={e => setWebsite(e.target.value)}
+                      onChange={(e) => setWebsite(e.target.value)}
                     />
                     <br />
                     <br /> <label htmlFor="lname">Audit</label>
@@ -246,7 +277,7 @@ const AddNewToken = () => {
                       id="lname"
                       name="audit"
                       value={audit}
-                      onChange={e => setAudit(e.target.value)}
+                      onChange={(e) => setAudit(e.target.value)}
                       placeholder="e.g. https://github.com/bitcoin"
                     />
                     <br />
@@ -261,7 +292,7 @@ const AddNewToken = () => {
                       id="fname"
                       name="telegram"
                       value={telegram}
-                      onChange={e => setTelegram(e.target.value)}
+                      onChange={(e) => setTelegram(e.target.value)}
                       placeholder="e.g. https://t.me/bitcoin"
                     />
                     <br />
@@ -273,7 +304,7 @@ const AddNewToken = () => {
                       id="lname"
                       name="twitter"
                       value={twitter}
-                      onChange={e => setTwitter(e.target.value)}
+                      onChange={(e) => setTwitter(e.target.value)}
                       placeholder="e.g. https://twitter.com/bitcoin"
                     />
                     <br /> <label htmlFor="fname">Discord</label>
@@ -284,7 +315,7 @@ const AddNewToken = () => {
                       id="fname"
                       name="discord"
                       value={discord}
-                      onChange={e => setDiscord(e.target.value)}
+                      onChange={(e) => setDiscord(e.target.value)}
                       placeholder="e.g. https://discord.gg/46URkm"
                     />
                     <br />
@@ -296,7 +327,7 @@ const AddNewToken = () => {
                       id="lname"
                       name="reddit"
                       value={reddit}
-                      onChange={e => setReddit(e.target.value)}
+                      onChange={(e) => setReddit(e.target.value)}
                       placeholder="e.g. https://reddit.com/r/bitcoin"
                     />
                     <br />
@@ -311,7 +342,7 @@ const AddNewToken = () => {
                       id="fname"
                       name="logo"
                       value={logo}
-                      onChange={e => setLogo(e.target.value)}
+                      onChange={(e) => setLogo(e.target.value)}
                       placeholder="e.g. https://i.ibb.co/logo.png"
                     />
                     <br /> <br />
@@ -329,7 +360,7 @@ const AddNewToken = () => {
                       maxLength="200"
                       placeholder=""
                       value={addInfo}
-                      onChange={e => setAddInfo(e.target.value)}
+                      onChange={(e) => setAddInfo(e.target.value)}
                     ></textarea>
                     <br />
                     <br /> <h2>Contact Info</h2>
@@ -347,7 +378,7 @@ const AddNewToken = () => {
                       id="lname"
                       name="emailContact"
                       value={emailContact}
-                      onChange={e => setEmailContact(e.target.value)}
+                      onChange={(e) => setEmailContact(e.target.value)}
                     />{" "}
                     <br /> <br />
                     <label htmlFor="lname">
@@ -361,15 +392,12 @@ const AddNewToken = () => {
                       id="lname"
                       name="telegramContact"
                       value={telegramContact}
-                      onChange={e => setTelegramContact(e.target.value)}
+                      onChange={(e) => setTelegramContact(e.target.value)}
                     />{" "}
                     <div>
                       {" "}
                       <br />
-                      <button
-                        className="add-coin-btn"
-                        type="submit"
-                      >
+                      <button className="add-coin-btn" type="submit">
                         Add Coin
                       </button>
                     </div>{" "}
