@@ -9,6 +9,7 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 
 const columns = [
+
   { id: "name", label: "PROMOTED COINS", minWidth: 170 },
   { id: "code", label: "SYMBOL", minWidth: 170 },
   {
