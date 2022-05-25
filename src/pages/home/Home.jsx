@@ -13,6 +13,7 @@ import PreSale from "./coins/PreSale";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -65,6 +66,7 @@ export default function BasicTabs() {
   };
 
   const handleVote = (index) => {
+    // recaptcha
     console.log(index);
     axios
       .put(`${serverUrl}/api/v1/vote`, { id: index })
@@ -87,10 +89,10 @@ export default function BasicTabs() {
         data.map((row) => {
           row_data.push(
             createData(
-              row.name,
-              JSON.parse(row.token_detail).coinSymbol,
-              row.votes,
-              <button onClick={() => handleVote(row.id)}>Vote</button>
+                row.name,
+                JSON.parse(row.token_detail).coinSymbol,
+                row.votes,
+                <button onClick={() => handleVote(row.id)}>Vote</button>
             )
           );
         });
