@@ -79,8 +79,7 @@ export default function BasicTabs() {
   const notifySuccess = (msg) => toast.success(msg);
   const notifyError = (msg) => toast.error(msg);
 
-  // const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
-  const siteKey = "6LfTmRIgAAAAAMb3qDgQSgLZiao1oSLsBs0ZcjgH"
+  const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
 
   function onChange(value, index) {
     // console.log('Captcha value:', value);
