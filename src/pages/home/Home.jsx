@@ -79,14 +79,17 @@ export default function BasicTabs() {
   const notifySuccess = (msg) => toast.success(msg);
   const notifyError = (msg) => toast.error(msg);
 
-  const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+  // const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+  const siteKey = "6LfTmRIgAAAAAMb3qDgQSgLZiao1oSLsBs0ZcjgH"
 
-  function onChange(value) {
+  function onChange(value, index) {
     // console.log('Captcha value:', value);
     axios
       .post(`${serverUrl}/api/v1/recaptcha`, { captcha_value: value })
       .then((data) => {
-        setCaptchaResult(data.success);
+        const results = JSON.parse(data.data[0]);
+        setCaptchaResult(results.success);
+        // console.log(results.success);
       });
   }
 
@@ -102,6 +105,7 @@ export default function BasicTabs() {
     //   .then((res) => {
     //     notifySuccess("Vote was successful");
     //     fetchTokenData();
+    //     handleClose();
     //   })
     //   .catch((err) => {
     //     notifyError("Something went wrong when voting");
@@ -228,8 +232,8 @@ export default function BasicTabs() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          <h4>Please prove you are human</h4>
           <ReCAPTCHA sitekey={siteKey} onChange={onChange} />
-          {captchaResult && <button type="submit">Submit</button>}
         </Box>
       </Modal>
     </div>
