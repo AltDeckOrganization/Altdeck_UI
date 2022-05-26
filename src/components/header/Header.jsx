@@ -17,8 +17,8 @@ function Header() {
   return (
     <div>
       <nav className="header">
-        <Link to="/" tag={Link} >
-          <span >
+        <Link to="/" tag={Link}>
+          <span>
             <img className="logo" src={Logo} />
           </span>
         </Link>
@@ -28,7 +28,7 @@ function Header() {
           <span className="navicon"></span>
         </label>
         <ul className="menu">
-          <li>
+          {/* <li>
             <Link
               to="/promotionPage"
               activeStyle={{ fontWeight: "bold" }}
@@ -36,7 +36,7 @@ function Header() {
             >
               Promotion
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link
               to="/addNewToken"
