@@ -69,7 +69,8 @@ export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
   const [rows, setRows] = React.useState([]);
   const [open, setOpen] = React.useState(false);
-  const [captchaResult, setCaptchaResult] = React.useState();
+  const captchaResult = React.useRef(false);
+  const tempIndex = React.useRef();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -87,8 +88,9 @@ export default function BasicTabs() {
       .post(`${serverUrl}/api/v1/recaptcha`, { captcha_value: value })
       .then((data) => {
         const results = JSON.parse(data.data[0]);
-        setCaptchaResult(results.success);
+        captchaResult.current = results.success;
         // console.log(results.success);
+        voteRequest(tempIndex.current);
       });
   }
 
@@ -97,19 +99,27 @@ export default function BasicTabs() {
   };
 
   const handleVote = (index) => {
-    // recaptcha
-    handleOpen();
-    // axios
-    //   .put(`${serverUrl}/api/v1/vote`, { id: index })
-    //   .then((res) => {
-    //     notifySuccess("Vote was successful");
-    //     fetchTokenData();
-    //     handleClose();
-    //   })
-    //   .catch((err) => {
-    //     notifyError("Something went wrong when voting");
-    //     console.log(err);
-    //   });
+    if (captchaResult.current) {
+      voteRequest(index);
+    } else {
+      // recaptcha
+      handleOpen();
+      tempIndex.current = index;
+    }
+  };
+
+  const voteRequest = (index) => {
+    axios
+      .put(`${serverUrl}/api/v1/vote`, { id: index })
+      .then((res) => {
+        notifySuccess("Vote was successful");
+        fetchTokenData();
+        handleClose();
+      })
+      .catch((err) => {
+        notifyError("Something went wrong when voting");
+        console.log(err);
+      });
   };
 
   const fetchTokenData = () => {
