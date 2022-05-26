@@ -12,6 +12,20 @@ import AllTimeBest from "./coins/AllTimeBest";
 import PreSale from "./coins/PreSale";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
+import Modal from "@mui/material/Modal";
+import ReCAPTCHA from "react-google-recaptcha";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,7 +88,8 @@ export default function BasicTabs() {
       .post(`${serverUrl}/api/v1/recaptcha`, { captcha_value: value })
       .then((data) => {
         const results = JSON.parse(data.data[0]);
-        captchaResult.current = results.success; // console.log(results.success);
+        captchaResult.current = results.success;
+        // console.log(results.success);
         voteRequest(tempIndex.current);
       });
   }
@@ -88,9 +103,23 @@ export default function BasicTabs() {
       voteRequest(index);
     } else {
       // recaptcha
-      tempIndex.current = index;
       handleOpen();
+      tempIndex.current = index;
     }
+  };
+
+  const voteRequest = (index) => {
+    axios
+      .put(`${serverUrl}/api/v1/vote`, { id: index })
+      .then((res) => {
+        notifySuccess("Vote was successful");
+        fetchTokenData();
+        handleClose();
+      })
+      .catch((err) => {
+        notifyError("Something went wrong when voting");
+        console.log(err);
+      });
   };
 
   const fetchTokenData = () => {
@@ -113,20 +142,6 @@ export default function BasicTabs() {
       })
       .catch((err) => {
         notifyError("Something went wrong when fetching token data");
-        console.log(err);
-      });
-  };
-
-  const voteRequest = (index) => {
-    axios
-      .put(`${serverUrl}/api/v1/vote`, { id: index })
-      .then((res) => {
-        notifySuccess("Vote was successful");
-        fetchTokenData();
-        handleClose();
-      })
-      .catch((err) => {
-        notifyError("Something went wrong when voting");
         console.log(err);
       });
   };
@@ -218,7 +233,18 @@ export default function BasicTabs() {
             <PreSale handleVote={handleVote} />
           </TabPanel>{" "} */}
         </Box>
-      </Container>{" "}
+      </Container>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <h4>Please prove you are human</h4>
+          <ReCAPTCHA sitekey={siteKey} onChange={onChange} />
+        </Box>
+      </Modal>
     </div>
   );
 }

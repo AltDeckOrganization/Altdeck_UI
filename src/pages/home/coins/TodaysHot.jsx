@@ -87,6 +87,7 @@ export default function TodaysHot(props) {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
+
                         <TableCell
                           style={{ color: "white" }}
                           key={column.id}
