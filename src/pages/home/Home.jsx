@@ -12,7 +12,20 @@ import AllTimeBest from "./coins/AllTimeBest";
 import PreSale from "./coins/PreSale";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
+import Modal from "@mui/material/Modal";
+import ReCAPTCHA from "react-google-recaptcha";
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,24 +68,53 @@ function createData(name, code, votes, vote) {
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
   const [rows, setRows] = React.useState([]);
+  const [open, setOpen] = React.useState(false);
+  const captchaResult = React.useRef(false);
+  const tempIndex = React.useRef();
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const serverUrl = process.env.REACT_APP_BACKEND_URL;
   const url = `${serverUrl}/api/v1/tokens`;
 
   const notifySuccess = (msg) => toast.success(msg);
   const notifyError = (msg) => toast.error(msg);
 
+  const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+
+  function onChange(value, index) {
+    // console.log('Captcha value:', value);
+    axios
+      .post(`${serverUrl}/api/v1/recaptcha`, { captcha_value: value })
+      .then((data) => {
+        const results = JSON.parse(data.data[0]);
+        captchaResult.current = results.success;
+        // console.log(results.success);
+        voteRequest(tempIndex.current);
+      });
+  }
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const handleVote = (index) => {
-    // recaptcha
-    console.log(index);
+    if (captchaResult.current) {
+      voteRequest(index);
+    } else {
+      // recaptcha
+      handleOpen();
+      tempIndex.current = index;
+    }
+  };
+
+  const voteRequest = (index) => {
     axios
       .put(`${serverUrl}/api/v1/vote`, { id: index })
       .then((res) => {
         notifySuccess("Vote was successful");
         fetchTokenData();
+        handleClose();
       })
       .catch((err) => {
         notifyError("Something went wrong when voting");
@@ -89,10 +131,10 @@ export default function BasicTabs() {
         data.map((row) => {
           row_data.push(
             createData(
-                row.name,
-                JSON.parse(row.token_detail).coinSymbol,
-                row.votes,
-                <button onClick={() => handleVote(row.id)}>Vote</button>
+              row.name,
+              JSON.parse(row.token_detail).coinSymbol,
+              row.votes,
+              <button onClick={() => handleVote(row.id)}>Vote</button>
             )
           );
         });
@@ -191,7 +233,18 @@ export default function BasicTabs() {
             <PreSale handleVote={handleVote} />
           </TabPanel>{" "} */}
         </Box>
-      </Container>{" "}
+      </Container>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <h4>Please prove you are human</h4>
+          <ReCAPTCHA sitekey={siteKey} onChange={onChange} />
+        </Box>
+      </Modal>
     </div>
   );
 }
