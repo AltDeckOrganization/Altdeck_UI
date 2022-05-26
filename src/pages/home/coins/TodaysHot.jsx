@@ -11,7 +11,7 @@ import Button from "react-scroll/modules/components/Button";
 import { IconButton } from "@mui/material";
 import { EditLocation, ThumbsUpDown, ThumbUpAlt } from "@mui/icons-material";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const columns = [
   { id: "name", label: "PROMOTED COINS", minWidth: 170 },
@@ -87,15 +87,13 @@ export default function TodaysHot(props) {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <React.Fragment>
-                          <TableCell
-                            style={{ color: "white" }}
-                            key={column.id}
-                            align={column.align}
-                          >
-                           <Link to={`tokens/${id}`} >{value}</Link>
-                          </TableCell>
-                        </React.Fragment>
+                        <TableCell
+                          style={{ color: "white" }}
+                          key={column.id}
+                          align={column.align}
+                        >
+                          {value}
+                        </TableCell>
                       );
                     })}
                   </TableRow>

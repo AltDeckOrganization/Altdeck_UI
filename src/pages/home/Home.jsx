@@ -13,7 +13,6 @@ import PreSale from "./coins/PreSale";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -55,29 +54,43 @@ function createData(name, code, votes, vote) {
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
   const [rows, setRows] = React.useState([]);
+  const [open, setOpen] = React.useState(false);
+  const captchaResult = React.useRef(false);
+  const tempIndex = React.useRef();
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const serverUrl = process.env.REACT_APP_BACKEND_URL;
   const url = `${serverUrl}/api/v1/tokens`;
 
   const notifySuccess = (msg) => toast.success(msg);
   const notifyError = (msg) => toast.error(msg);
 
+  const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+
+  function onChange(value, index) {
+    // console.log('Captcha value:', value);
+    axios
+      .post(`${serverUrl}/api/v1/recaptcha`, { captcha_value: value })
+      .then((data) => {
+        const results = JSON.parse(data.data[0]);
+        captchaResult.current = results.success; // console.log(results.success);
+        voteRequest(tempIndex.current);
+      });
+  }
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const handleVote = (index) => {
-    // recaptcha
-    console.log(index);
-    axios
-      .put(`${serverUrl}/api/v1/vote`, { id: index })
-      .then((res) => {
-        notifySuccess("Vote was successful");
-        fetchTokenData();
-      })
-      .catch((err) => {
-        notifyError("Something went wrong when voting");
-        console.log(err);
-      });
+    if (captchaResult.current) {
+      voteRequest(index);
+    } else {
+      // recaptcha
+      tempIndex.current = index;
+      handleOpen();
+    }
   };
 
   const fetchTokenData = () => {
@@ -89,10 +102,10 @@ export default function BasicTabs() {
         data.map((row) => {
           row_data.push(
             createData(
-                row.name,
-                JSON.parse(row.token_detail).coinSymbol,
-                row.votes,
-                <button onClick={() => handleVote(row.id)}>Vote</button>
+              row.name,
+              JSON.parse(row.token_detail).coinSymbol,
+              row.votes,
+              <button onClick={() => handleVote(row.id)}>Vote</button>
             )
           );
         });
@@ -100,6 +113,20 @@ export default function BasicTabs() {
       })
       .catch((err) => {
         notifyError("Something went wrong when fetching token data");
+        console.log(err);
+      });
+  };
+
+  const voteRequest = (index) => {
+    axios
+      .put(`${serverUrl}/api/v1/vote`, { id: index })
+      .then((res) => {
+        notifySuccess("Vote was successful");
+        fetchTokenData();
+        handleClose();
+      })
+      .catch((err) => {
+        notifyError("Something went wrong when voting");
         console.log(err);
       });
   };
