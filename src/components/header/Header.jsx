@@ -17,8 +17,8 @@ function Header() {
   return (
     <div>
       <nav className="header">
-        <Link to="/" tag={Link} >
-          <span >
+        <Link to="/" tag={Link}>
+          <span>
             <img className="logo" src={Logo} />
           </span>
         </Link>
@@ -31,7 +31,7 @@ function Header() {
           <li>
             <Link
               to="/promotionPage"
-              activeStyle={{ fontWeight: "bold" }}
+              activestyle={{ fontWeight: "bold" }}
               onMouseOut={(event) => onMouseOut(event)}
             >
               Promotion
@@ -40,7 +40,7 @@ function Header() {
           <li>
             <Link
               to="/addNewToken"
-              activeStyle={{ fontWeight: "bold" }}
+              activestyle={{ fontWeight: "bold" }}
               onMouseOut={(event) => onMouseOut(event)}
             >
               Add Token
@@ -68,7 +68,7 @@ export default Header;
 //       <Link
 //         to="/addNewToken"
 //         tag={Link}
-//         activeStyle={{ fontWeight: "bold" }}
+//         activestyle={{ fontWeight: "bold" }}
 //         style={{ color: theme.text }}
 //         onMouseEnter={(event) => onMouseEnter(event, theme.highlight)}
 //         onMouseOut={(event) => onMouseOut(event)}
@@ -80,7 +80,7 @@ export default Header;
 //       <Link
 //         to="/pormotionPage"
 
-//         activeStyle={{ fontWeight: "bold" }}
+//         activestyle={{ fontWeight: "bold" }}
 //         style={{ color: theme.text }}
 //         onMouseEnter={(event) => onMouseEnter(event, theme.highlight)}
 //         onMouseOut={(event) => onMouseOut(event)}
