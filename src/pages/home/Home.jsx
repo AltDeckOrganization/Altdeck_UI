@@ -7,6 +7,7 @@ import { Box, Grid, Container } from "@mui/material";
 import "./Home.css";
 import Soku from "../../images/Soku.gif";
 import TodaysHot from "./coins/TodaysHot";
+import NewToken from "./coins/NewToken";
 import News from "./coins/News";
 import AllTimeBest from "./coins/AllTimeBest";
 import PreSale from "./coins/PreSale";
@@ -122,6 +123,12 @@ export default function BasicTabs() {
       });
   };
 
+  // Get only todays hot data
+  // const getTodaysHot = rows.filter((row) => row.status ==== "todayshot");
+  const getTodaysHot = rows.filter((row) => row.votes > 500);
+
+  // Get only tokens data  
+
   const fetchTokenData = () => {
     axios
       .get(`${serverUrl}/api/v1/tokens`)
@@ -139,6 +146,7 @@ export default function BasicTabs() {
           );
         });
         setRows(row_data);
+        // console.log(res.data);
       })
       .catch((err) => {
         notifyError("Something went wrong when fetching token data");
@@ -191,7 +199,7 @@ export default function BasicTabs() {
                 label="Todays Hot"
                 {...a11yProps(0)}
               />
-              {/* <Tab
+              <Tab
                 style={{
                   width: "15%",
                   color: "white",
@@ -200,7 +208,7 @@ export default function BasicTabs() {
                 label="New"
                 {...a11yProps(1)}
               />
-              <Tab
+              {/* <Tab
                 style={{
                   width: "15%",
                   color: "white",
@@ -221,12 +229,12 @@ export default function BasicTabs() {
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
-            <TodaysHot handleVote={handleVote} rows={rows} />
+            <TodaysHot handleVote={handleVote} rows={getTodaysHot} />
           </TabPanel>
-          {/* <TabPanel value={value} index={1}>
-            <News handleVote={handleVote} />
+          <TabPanel value={value} index={1}>
+            <NewToken handleVote={handleVote} rows={rows} />
           </TabPanel>
-          <TabPanel value={value} index={2}>
+          {/* <TabPanel value={value} index={2}>
             <AllTimeBest handleVote={handleVote} />
           </TabPanel>
           <TabPanel value={value} index={3}>

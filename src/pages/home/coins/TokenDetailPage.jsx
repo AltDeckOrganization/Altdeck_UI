@@ -15,7 +15,7 @@ const TokenDetailPage = () => {
       axios
         .get(`${url}/${id}`)
         .then((res) => {
-          setCoin(res.data.json());
+          setCoin(res.data);
         })
         .catch((e) => console.log(e))
     };
