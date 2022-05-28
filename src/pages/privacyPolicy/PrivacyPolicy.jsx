@@ -1,6 +1,6 @@
 import React from "react";
 import "./PrivacyPolicy.css";
-import { Container, Grid, Box } from "@mui/material";
+import { Container, Grid, Box, Link } from "@mui/material";
 
 const PrivacyPolicy = () => {
   return (
@@ -101,7 +101,11 @@ const PrivacyPolicy = () => {
                   our advertising partners has their own Privacy Policy for their policies on user data.
                   For easier access, we hyperlinked to their Privacy Policies below.
                   <ul>
-                    <li>Google https://policies.google.com/technologies/ads</li>
+                    <li>
+                      <Link href="https://policies.google.com/technologies/ads">
+                        Google
+                      </Link>
+                    </li>
                   </ul>
                 </p>
                 <h2>Advertising Partners Privacy Policies</h2>
