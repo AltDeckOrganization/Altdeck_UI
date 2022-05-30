@@ -14,6 +14,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import Modal from "@mui/material/Modal";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useNavigate } from "react-router";
 
 const style = {
   position: "absolute",
@@ -60,14 +61,15 @@ function a11yProps(index) {
   };
 }
 
-function createData(name, code, votes, vote) {
+function createData(name, code, votes, vote, id) {
   //   const density = population / size;
-  return { name, code, votes, vote };
+  return { name, code, votes, vote, id };
 }
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
-  const [rows, setRows] = React.useState([]);
+  const [todaysHotRows, setTodaysHotRows] = React.useState([]);
+  const [newRows, setNewRows] = React.useState([]);
   const [open, setOpen] = React.useState(false);
   const captchaResult = React.useRef(false);
   const tempIndex = React.useRef();
@@ -76,6 +78,7 @@ export default function BasicTabs() {
   const handleClose = () => setOpen(false);
   const serverUrl = process.env.REACT_APP_BACKEND_URL;
   const url = `${serverUrl}/api/v1/tokens`;
+  const navigate = useNavigate();
 
   const notifySuccess = (msg) => toast.success(msg);
   const notifyError = (msg) => toast.error(msg);
@@ -127,23 +130,41 @@ export default function BasicTabs() {
       .get(`${serverUrl}/api/v1/tokens`)
       .then((res) => {
         const { data } = res;
-        const row_data = [];
-        data.map((row) => {
-          row_data.push(
-            createData(
+        const today_row_data = data
+          .filter((row) => row.status === "todayshot")
+          .map((row) => {
+            return createData(
               row.name,
               JSON.parse(row.token_detail).coinSymbol,
               row.votes,
-              <button onClick={() => handleVote(row.id)}>Vote</button>
-            )
-          );
-        });
-        setRows(row_data);
+              <button onClick={() => handleVote(row.id)}>Vote</button>,
+              row.id
+            );
+          });
+
+        const new_row_data = data
+          .filter((row) => row.status === "recent")
+          .map((row) => {
+            return createData(
+              row.name,
+              JSON.parse(row.token_detail).coinSymbol,
+              row.votes,
+              <button onClick={() => handleVote(row.id)}>Vote</button>,
+              row.id
+            );
+          });
+
+        setTodaysHotRows(today_row_data);
+        setNewRows(new_row_data);
       })
       .catch((err) => {
         notifyError("Something went wrong when fetching token data");
         console.log(err);
       });
+  };
+
+  const update = (rowId) => {
+    navigate(`/tokens/${rowId}`);
   };
 
   React.useEffect(() => {
@@ -191,7 +212,7 @@ export default function BasicTabs() {
                 label="Todays Hot"
                 {...a11yProps(0)}
               />
-              {/* <Tab
+              <Tab
                 style={{
                   width: "15%",
                   color: "white",
@@ -200,7 +221,7 @@ export default function BasicTabs() {
                 label="New"
                 {...a11yProps(1)}
               />
-              <Tab
+              {/* <Tab
                 style={{
                   width: "15%",
                   color: "white",
@@ -221,12 +242,16 @@ export default function BasicTabs() {
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
-            <TodaysHot handleVote={handleVote} rows={rows} />
+            <TodaysHot
+              handleVote={handleVote}
+              rows={todaysHotRows}
+              redirectTo={update}
+            />
           </TabPanel>
-          {/* <TabPanel value={value} index={1}>
-            <News handleVote={handleVote} />
+          <TabPanel value={value} index={1}>
+            <News handleVote={handleVote} rows={newRows} redirectTo={update} />
           </TabPanel>
-          <TabPanel value={value} index={2}>
+          {/*<TabPanel value={value} index={2}>
             <AllTimeBest handleVote={handleVote} />
           </TabPanel>
           <TabPanel value={value} index={3}>
