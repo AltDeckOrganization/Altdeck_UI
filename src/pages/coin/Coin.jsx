@@ -23,6 +23,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 
 const style = {
   position: "absolute",
@@ -108,12 +110,14 @@ const Coin = () => {
   };
 
   return (
-    <div className="coin">
-      <center>
-        <img className="add" src={Add} />
-      </center>
-      <Container>
-        {/* <p className="alert-section">
+    <React.Fragment>
+      <Header />
+      <div className="coin">
+        <center>
+          <img className="add" src={Add} />
+        </center>
+        <Container>
+          {/* <p className="alert-section">
           This project is in presale phase. Be careful when investing into
           presales - these projects have no history and no known smart contract.
           <br /> For more information how to spot scams, please read our article
@@ -121,88 +125,95 @@ const Coin = () => {
           <br />
           Are you the coin owner and want to remove this message? Contact Us Now
         </p> */}
-      </Container>
-      <Container>
-        {/* <Box>      {" "} */}
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={7} sm={7} lg={7}>
-            <Card
-              sx={{
-                display: "flex",
-                color: "#fff",
-                backgroundColor: "#1e2635",
-              }}
-            >
-              {/* <CardMedia
+        </Container>
+        <Container>
+          {/* <Box>      {" "} */}
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={7} sm={7} lg={7}>
+              <Card
+                sx={{
+                  display: "flex",
+                  color: "#fff",
+                  backgroundColor: "#1e2635",
+                }}
+              >
+                {/* <CardMedia
                 component="img"
                 sx={{ width: 151 }}
                 image={tokenDetail.coinSymbol}
                 alt="Live from space album cover"
               /> */}
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <CardContent sx={{ flex: "1 0 auto", color: "#fff" }}>
-                  <Typography component="div" variant="h4">
-                    {token.name}
-                  </Typography>
-                  <Typography variant="subtitle1" color="#fff" component="div">
-                    <b>{token.blockchain} contract address:</b>
-                    0xFA89bA0e007C7609258B93Ab4DE4a2c19d7ccCCE
-                  </Typography>
-                </CardContent>
-                <Box
-                  sx={{
-                    display: "flex",
-                    color: "#fff",
-                    alignItems: "center",
-                    pl: 1,
-                    pb: 1,
-                  }}
-                >
-                  <IconButton aria-label="previous" href={tokenDetail.telegram}>
-                    {theme.direction === "rtl" ? (
-                      <TelegramIcon
-                        sx={{ height: 26, width: 26, color: "#fff" }}
-                      />
-                    ) : (
-                      <TelegramIcon
-                        sx={{ height: 26, width: 26, color: "#fff" }}
-                      />
-                    )}
-                  </IconButton>
-                  <IconButton
-                    aria-label="play/pause"
-                    href={tokenDetail.twitter}
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <CardContent sx={{ flex: "1 0 auto", color: "#fff" }}>
+                    <Typography component="div" variant="h4">
+                      {token.name}
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      color="#fff"
+                      component="div"
+                    >
+                      <b>{token.blockchain} contract address:</b>
+                      0xFA89bA0e007C7609258B93Ab4DE4a2c19d7ccCCE
+                    </Typography>
+                  </CardContent>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      color: "#fff",
+                      alignItems: "center",
+                      pl: 1,
+                      pb: 1,
+                    }}
                   >
-                    <TwitterIcon
-                      sx={{ height: 26, width: 26, color: "#fff" }}
-                    />
-                  </IconButton>
-                  <IconButton aria-label="next">
-                    {theme.direction === "rtl" ? (
-                      <LanguageIcon
+                    <IconButton
+                      aria-label="previous"
+                      href={tokenDetail.telegram}
+                    >
+                      {theme.direction === "rtl" ? (
+                        <TelegramIcon
+                          sx={{ height: 26, width: 26, color: "#fff" }}
+                        />
+                      ) : (
+                        <TelegramIcon
+                          sx={{ height: 26, width: 26, color: "#fff" }}
+                        />
+                      )}
+                    </IconButton>
+                    <IconButton
+                      aria-label="play/pause"
+                      href={tokenDetail.twitter}
+                    >
+                      <TwitterIcon
                         sx={{ height: 26, width: 26, color: "#fff" }}
                       />
-                    ) : (
-                      <LanguageIcon
-                        sx={{ height: 26, width: 26, color: "#fff" }}
-                      />
-                    )}
-                  </IconButton>
+                    </IconButton>
+                    <IconButton aria-label="next">
+                      {theme.direction === "rtl" ? (
+                        <LanguageIcon
+                          sx={{ height: 26, width: 26, color: "#fff" }}
+                        />
+                      ) : (
+                        <LanguageIcon
+                          sx={{ height: 26, width: 26, color: "#fff" }}
+                        />
+                      )}
+                    </IconButton>
+                  </Box>
                 </Box>
-              </Box>
-            </Card>{" "}
-            <br />
-            <Card
-              sx={{
-                display: "block",
-                padding: 5,
-                color: "#fff",
-                backgroundColor: "#1e2635",
-              }}
-            >
-              <h3>Description</h3>
-              <p>{tokenDetail.coinDescription}</p>
-              {/* <h5></h5>
+              </Card>{" "}
+              <br />
+              <Card
+                sx={{
+                  display: "block",
+                  padding: 5,
+                  color: "#fff",
+                  backgroundColor: "#1e2635",
+                }}
+              >
+                <h3>Description</h3>
+                <p>{tokenDetail.coinDescription}</p>
+                {/* <h5></h5>
               * WHITEPAPER RELEASE <br />
               * STAKING SOON
               <br />
@@ -215,62 +226,62 @@ const Coin = () => {
                 🥎 Tokens will be credited into your wallet at the same time
                 after buying.
               </p> */}
-            </Card>{" "}
-          </Grid>
-          <Grid item xs={12} sm={5} md={5} lg={5}>
-            <Card
-              sx={{
-                display: "flex",
-                backgroundColor: "#1e2635",
-                color: "#fff",
-              }}
-            >
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <center>
-                  <h2>Coin Information</h2>
-                </center>{" "}
-                <CardContent sx={{ flex: "1 0 auto" }}>
-                  <Typography component="div" variant="h6">
-                    KYC Verified:{" "}
-                    <span className="answers">Not KYC Verified</span>
-                  </Typography>
-                  {/* <hr /> */}
-                  {/* <Typography component="div" variant="h6">
+              </Card>{" "}
+            </Grid>
+            <Grid item xs={12} sm={5} md={5} lg={5}>
+              <Card
+                sx={{
+                  display: "flex",
+                  backgroundColor: "#1e2635",
+                  color: "#fff",
+                }}
+              >
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <center>
+                    <h2>Coin Information</h2>
+                  </center>{" "}
+                  <CardContent sx={{ flex: "1 0 auto" }}>
+                    <Typography component="div" variant="h6">
+                      KYC Verified:{" "}
+                      <span className="answers">Not KYC Verified</span>
+                    </Typography>
+                    {/* <hr /> */}
+                    {/* <Typography component="div" variant="h6">
                     Presale Status:{" "}
                     <span className="answers">
                       <button className="presale-btn">PreSale</button>
                     </span>
                   </Typography> */}
 
-                  {/* <Typography component="div" variant="h6">
+                    {/* <Typography component="div" variant="h6">
                     Listing Status: <span className="answers">500 / 500</span>
                   </Typography> */}
-                  <Typography component="div" variant="h6">
-                    Launch:{" "}
-                    <span className="answers">
-                      {tokenDetail.coinLaunchDate}
-                    </span>
-                  </Typography>
-                  <Typography component="div" variant="h6">
-                    Votes: <span className="answers">{token.votes}</span>
-                  </Typography>
-                  {/* <Typography component="div" variant="h6">
+                    <Typography component="div" variant="h6">
+                      Launch:{" "}
+                      <span className="answers">
+                        {tokenDetail.coinLaunchDate}
+                      </span>
+                    </Typography>
+                    <Typography component="div" variant="h6">
+                      Votes: <span className="answers">{token.votes}</span>
+                    </Typography>
+                    {/* <Typography component="div" variant="h6">
                     Votes Today: <span className="answers">29697</span>
                   </Typography> */}
-                  <br />
-                  <center>
-                    <button className="vote-btn" onClick={handleVote}>
-                      VOTE FOR {token.name}
-                    </button>
-                  </center>
-                </CardContent>
-              </Box>
-            </Card>
+                    <br />
+                    <center>
+                      <button className="vote-btn" onClick={handleVote}>
+                        VOTE FOR {token.name}
+                      </button>
+                    </center>
+                  </CardContent>
+                </Box>
+              </Card>
+            </Grid>
           </Grid>
-        </Grid>
-        <br></br>
-      </Container>{" "}
-      {/* <Container>
+          <br></br>
+        </Container>{" "}
+        {/* <Container>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <div className="tab">
@@ -356,18 +367,20 @@ const Coin = () => {
           </Grid>
         </Grid>
       </Container> */}
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <h4>Please prove you are human</h4>
-          <ReCAPTCHA sitekey={siteKey} onChange={onChange} />
-        </Box>
-      </Modal>
-    </div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <h4>Please prove you are human</h4>
+            <ReCAPTCHA sitekey={siteKey} onChange={onChange} />
+          </Box>
+        </Modal>
+      </div>
+      <Footer />
+    </React.Fragment>
   );
 };
 
