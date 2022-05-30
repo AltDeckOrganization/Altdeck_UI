@@ -199,7 +199,7 @@ export default function BasicTabs() {
                 label="Todays Hot"
                 {...a11yProps(0)}
               />
-              <Tab
+              {/* <Tab
                 style={{
                   width: "15%",
                   color: "white",
@@ -207,7 +207,7 @@ export default function BasicTabs() {
                 }}
                 label="New"
                 {...a11yProps(1)}
-              />
+              /> */}
               {/* <Tab
                 style={{
                   width: "15%",
@@ -229,11 +229,11 @@ export default function BasicTabs() {
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
-            <TodaysHot handleVote={handleVote} rows={getTodaysHot} />
+            <TodaysHot handleVote={handleVote} rows={rows} />
           </TabPanel>
-          <TabPanel value={value} index={1}>
-            <NewToken handleVote={handleVote} rows={rows} />
-          </TabPanel>
+          {/* <TabPanel value={value} index={1}>
+            <NewToken handleVote={handleVote}/>
+          </TabPanel> */}
           {/* <TabPanel value={value} index={2}>
             <AllTimeBest handleVote={handleVote} />
           </TabPanel>
