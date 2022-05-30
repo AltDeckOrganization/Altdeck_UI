@@ -18,17 +18,17 @@ export default function Footer() {
         <Container>
           <Box>
             <Grid container spacing={4}>
-            <Grid item  xs={12} sm={6} md={8} lg={6}>                    <br></br>
-
+              <Grid item xs={12} sm={6} md={8} lg={6}>
+                <br></br>
                 <Box>
                   <Link to="/">
-  
                     <img src={Logo} className="footer-logo" />
                   </Link>
                 </Box>
                 <br></br>
               </Grid>
-              <Grid item  xs={12} sm={3} md={2} lg={3}>                    <br></br>
+              <Grid item xs={12} sm={3} md={2} lg={3}>
+                <br></br>
                 <Box>
                   <h3>Quick Links</h3>
                   <Link to="/privacyPolicy" className="footerLinks">
@@ -41,30 +41,23 @@ export default function Footer() {
                   </Link>
                 </Box>
               </Grid>
-
-              <Grid item  xs={12} sm={3} md={2} lg={3}>                    <br></br>
+              <Grid item xs={12} sm={3} md={2} lg={3}>
+                <br></br>
                 <Box>
                   <h3>Follow Us</h3>
                   <a
                     className="footerLinks"
-                    href="www.google.com"
+                    href="https://t.me/AltDeck"
                     color="inherit"
                   >
                     <TelegramIcon />
                   </a>
                   <a
                     className="footerLinks"
-                    href="www.twitter.com"
+                    href="https://www.twitter.com/@AltDeck_io"
                     color="inherit"
                   >
                     <TwitterIcon />
-                  </a>
-                  <a
-                    className="footerLinks"
-                    href="www.twitter.com"
-                    color="inherit"
-                  >
-                    <FacebookIcon />
                   </a>
                 </Box>
               </Grid>

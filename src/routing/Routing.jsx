@@ -18,7 +18,7 @@ export default function Routing() {
         <Route path="/promotionPage" element={<PromotionPage />} />
         <Route path="/addNewToken" element={<AddNewToken />} />
         <Route path="/tos" element={<Tos />} />
-        <Route exact path="/privacyPolicy" element={<PrivacyPolicy />} />
+        <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
       </Routes>
     </Router>
   );
