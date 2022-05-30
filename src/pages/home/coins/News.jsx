@@ -7,97 +7,37 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import Button from "react-scroll/modules/components/Button";
+import { IconButton } from "@mui/material";
+import { EditLocation, ThumbsUpDown, ThumbUpAlt } from "@mui/icons-material";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const columns = [
-  { id: "name", label: "PROMOTED COINS", minWidth: 170 },
+  { id: "name", label: "COINS", minWidth: 170 },
   { id: "code", label: "SYMBOL", minWidth: 170 },
   {
-    id: "population",
-    label: "1H",
+    id: "votes",
+    label: "VOTES",
     minWidth: 170,
     align: "right",
-    format: (value) => value.toLocaleString("en-US"),
   },
   {
-    id: "size",
-    label: "24H",
+    id: "vote",
+    label: "VOTE",
     minWidth: 170,
     align: "right",
-    format: (value) => value.toLocaleString("en-US"),
-  },
-  {
-    id: "market",
-    label: "MARKET MAP",
-    minWidth: 170,
-    align: "right",
-    format: (value) => value.toFixed(2),
-  },
-  {
-    id: "launch",
-    label: "LAUNCH",
-    minWidth: 170,
-    align: "right",
-    format: (value) => value.toFixed(2),
-  },
-  {
-    id: "upvotes",
-    label: "UPVOTES",
-    minWidth: 170,
-    align: "right",
-    format: (value) => value.toFixed(2),
   },
 ];
 
-function createData(name, code, population, size, market, launch, upvotes) {
-  //   const density = population / size;
-  return { name, code, population, size, market, launch, upvotes };
-}
+// const rows = [createData("India", "h", 0, <button>Vote</button>)];
 
-const rows = [
-  createData("India", "h", "IN", 1324171354, 3287263, 1324171354, 3287263),
-  createData("China", "CN", 1403500365, 9596961, 3287263, 1324171354, 3287263),
-  createData("Italy", "IT", 60483973, 301340, 3287263, 1324171354, 3287263),
-  createData(
-    "United States",
-    "US",
-    327167434,
-    9833520,
-    3287263,
-    1324171354,
-    3287263
-  ),
-  createData("Canada", "CA", 37602103, 9984670, 3287263, 1324171354, 3287263),
-  createData(
-    "Australia",
-    "AU",
-    25475400,
-    7692024,
-    3287263,
-    1324171354,
-    3287263
-  ),
-  createData("Germany", "DE", 83019200, 357578, 3287263, 1324171354, 3287263),
-  createData("Ireland", "IE", 4857000, 70273, 3287263, 1324171354, 3287263),
-  createData("Mexico", "MX", 126577691, 1972550, 3287263, 1324171354, 3287263),
-  createData("Japan", "JP", 126317000, 377973, 3287263, 1324171354, 3287263),
-  createData("France", "FR", 67022000, 640679, 3287263, 1324171354, 3287263),
-  createData(
-    "United Kingdom",
-    "GB",
-    67545757,
-    242495,
-    3287263,
-    1324171354,
-    3287263
-  ),
-  createData("Russia", "RU", 146793744, 17098246, 3287263, 1324171354, 3287263),
-  createData("Nigeria", "NG", 200962417, 923768, 3287263, 1324171354, 3287263),
-  createData("Brazil", "BR", 210147125, 8515767, 3287263, 1324171354, 3287263),
-];
-
-export default function News() {
+export default function News(props) {
+  const { handleVote, rows, redirectTo } = props;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const serverUrl = process.env.REACT_APP_BACKEND_URL;
+  const url = `${serverUrl}/api/v1/tokens`;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -107,6 +47,12 @@ export default function News() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const upvoteButton = (index) => (
+    <IconButton onClick={() => handleVote(index)}>
+      <ThumbUpAlt color="primary" />
+    </IconButton>
+  );
 
   return (
     <Paper
@@ -137,7 +83,13 @@ export default function News() {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={row.code}
+                    onClick={() => redirectTo(row.id)}
+                  >
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
@@ -146,9 +98,7 @@ export default function News() {
                           key={column.id}
                           align={column.align}
                         >
-                          {column.format && typeof value === "number"
-                            ? column.format(value)
-                            : value}
+                          {value}
                         </TableCell>
                       );
                     })}
