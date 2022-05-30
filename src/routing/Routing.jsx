@@ -8,6 +8,7 @@ import PromotionPage from "../pages/promotionPage/PromotionPage";
 import Tos from "../pages/tos/Tos";
 import PrivacyPolicy from "../pages/privacyPolicy/PrivacyPolicy";
 import TokenDetailPage from "../pages/home/coins/TokenDetailPage";
+import Coin from "../pages/coin/Coin";
 
 export default function Routing() {
   return (
@@ -15,12 +16,12 @@ export default function Routing() {
       <Header />
       <div>
         <Routes>
-          <Route path="/tokens/:id" element={TokenDetailPage} />
+          <Route path="/tokens/:id" element={<Coin />} />
           <Route exact path="/" element={<Home />} />
           <Route path="/promotionPage" element={<PromotionPage />} />
           <Route path="/addNewToken" element={<AddNewToken />} />
           <Route path="/tos" element={<Tos />} />
-          <Route exact path="/privacyPolicy" element={<PrivacyPolicy/>} />
+          <Route exact path="/privacyPolicy" element={<PrivacyPolicy />} />
         </Routes>
       </div>
       <Footer />

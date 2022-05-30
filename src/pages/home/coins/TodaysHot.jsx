@@ -14,7 +14,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const columns = [
-  { id: "name", label: "PROMOTED COINS", minWidth: 170 },
+  { id: "name", label: "COINS", minWidth: 170 },
   { id: "code", label: "SYMBOL", minWidth: 170 },
   {
     id: "votes",
@@ -33,7 +33,7 @@ const columns = [
 // const rows = [createData("India", "h", 0, <button>Vote</button>)];
 
 export default function TodaysHot(props) {
-  const { handleVote, rows } = props;
+  const { handleVote, rows, redirectTo } = props;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const serverUrl = process.env.REACT_APP_BACKEND_URL;
@@ -83,11 +83,16 @@ export default function TodaysHot(props) {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={row.code}
+                    onClick={() => redirectTo(row.id)}
+                  >
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-
                         <TableCell
                           style={{ color: "white" }}
                           key={column.id}
