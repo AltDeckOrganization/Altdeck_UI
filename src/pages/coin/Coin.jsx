@@ -20,6 +20,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import { toast, ToastContainer } from "react-toastify";
 import Modal from "@mui/material/Modal";
 import ReCAPTCHA from "react-google-recaptcha";
+import ls from 'localstorage-slim';
 
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -96,22 +97,31 @@ const Coin = () => {
   }
 
   const voteRequest = (index) => {
-    axios
-      .put(`${serverUrl}/api/v1/vote`, { id: index })
-      .then((res) => {
-        notifySuccess("Vote was successful");
-        fetchTokenDetails();
-        handleClose();
-      })
-      .catch((err) => {
-        notifyError("Something went wrong when voting");
-        console.log(err);
-      });
+    const tokenId = JSON.parse(ls.get('tokenId', { decrypt: true }));
+    if (tokenId === index) {
+      notifyError("You've voted already!");
+    } else {
+      ls.set('tokenId', JSON.stringify(index), { encrypt: true });
+      axios
+        .put(`${serverUrl}/api/v1/vote`, { id: index })
+        .then((res) => {
+          notifySuccess("Vote was successful");
+          fetchTokenDetails();
+          handleClose();
+        })
+        .catch((err) => {
+          notifyError("Something went wrong when voting");
+          console.log(err);
+        });
+    }
   };
 
   return (
     <React.Fragment>
       <Header />
+      {/* Toaster */}
+      <ToastContainer position="top-center" />
+      {/* Toaster */}
       <div className="coin">
         <center>
           <img className="add" src={Add} />
@@ -154,7 +164,7 @@ const Coin = () => {
                       component="div"
                     >
                       <b>{token.blockchain} contract address:</b>
-                      0xFA89bA0e007C7609258B93Ab4DE4a2c19d7ccCCE
+                      {tokenDetail.coinAddress ? tokenDetail.coinAddress : "N/A"}
                     </Typography>
                   </CardContent>
                   <Box
