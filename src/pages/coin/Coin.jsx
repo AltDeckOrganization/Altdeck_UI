@@ -164,7 +164,7 @@ const Coin = () => {
                       component="div"
                     >
                       <b>{token.blockchain} contract address:</b>
-                      0xFA89bA0e007C7609258B93Ab4DE4a2c19d7ccCCE
+                      {tokenDetail.coinAddress ? tokenDetail.coinAddress : "N/A"}
                     </Typography>
                   </CardContent>
                   <Box
