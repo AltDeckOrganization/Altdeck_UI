@@ -7,6 +7,7 @@ import { Box, Grid, Container } from "@mui/material";
 import "./Home.css";
 import Soku from "../../images/Soku.gif";
 import TodaysHot from "./coins/TodaysHot";
+import SearchToken from "./coins/SearchToken";
 import News from "./coins/News";
 import AllTimeBest from "./coins/AllTimeBest";
 import PreSale from "./coins/PreSale";
