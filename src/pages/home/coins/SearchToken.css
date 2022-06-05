@@ -1,0 +1,16 @@
+#token-search:focus-within {
+  /* outline: none !important;
+    border: 2px solid red; */
+}
+
+
+
+/* .MuiAutocomplete-hasPopupIcon,
+.css-viou3o-MuiAutocomplete-root,
+.MuiOutlinedInput-root,
+.MuiAutocomplete-hasClearIcon,
+.css-viou3o-MuiAutocomplete-root, */
+.MuiOutlinedInput-root:focus-visible {
+  /* border: 1px solid red; */
+  /* outline: none; */
+}
